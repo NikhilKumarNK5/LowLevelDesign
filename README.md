@@ -282,7 +282,103 @@ classDiagram
     Paneer --|> ToppingDecorator : is-a
     Chicken --|> ToppingDecorator : is-a
 ```
+---
 
+## 🏗️ Creational Design Patterns
+Creational patterns deal with **object creation mechanisms**, trying to create objects in a manner suitable to the situation. They reduce complexity by controlling how objects are instantiated, ensuring that the system is independent of how its objects are created, composed, and represented.
+
+---
+
+### 🏭 Factory Pattern
+The **Factory Pattern** (specifically Factory Method) provides an interface for creating objects in a superclass but allows subclasses to alter the type of objects that will be created.
+
+* **Key takeaways:**
+  * **Abstraction of Creation:** It hides the instantiation logic from the client.
+  * **Loose Coupling:** The client interacts with an interface or abstract class rather than a specific concrete implementation.
+  * **Follows OCP:** You can introduce new types of objects (subclasses) without breaking existing client code.
+  * **Example:** A `ShapeFactory` that returns either a `Circle` or a `Square` based on an input string.
+
+---
+
+### 🏰 Abstract Factory Pattern
+The **Abstract Factory Pattern** is a "factory of factories." It provides an interface for creating **families of related or dependent objects** without specifying their concrete classes.
+
+* **Key takeaways:**
+  * **Family Consistency:** It ensures that the objects created from one factory are compatible with each other (e.g., a "Dark Mode" factory creates only dark buttons and dark checkboxes).
+  * **Constraint:** Useful when a system should be independent of how its products are created, but those products must work together.
+  * **Higher Abstraction:** While Factory handles one product, Abstract Factory handles a set of related products.
+
+---
+
+### ⚠️ The Problem: Direct Instantiation (Tightly Coupled)
+
+When classes directly instantiate objects using the `new` keyword, it leads to several maintenance and architectural issues.
+
+```mermaid
+graph TD
+    subgraph "Clients"
+    A[Class A] -- "new Circle()" --> C1[Circle]
+    B[Class B] -- "new Square()" --> S1[Square]
+    D[Class D] -- "new Square()" --> S1
+    C[Class C] -- "new Circle()" --> C1
+    E[Class E] -- "new Square()" --> S1
+    end
+
+    subgraph "Hierarchy"
+    S[Shape <<interface>>]
+    C1 -- "Is-a" --> S
+    S1 -- "Is-a" --> S
+    end
+
+    style A fill:#fff3e0,stroke:#ff9800
+    style B fill:#fff3e0,stroke:#ff9800
+    style C fill:#fff3e0,stroke:#ff9800
+    style D fill:#fff3e0,stroke:#ff9800
+    style E fill:#fff3e0,stroke:#ff9800
+```
+**Key Issues Identified:**
+* **Tight Coupling:** The client classes (A, B, C, etc.) are tightly coupled to concrete implementations (Circle, Square).
+* **Maintenance Overhead:** If the constructor of Square changes (e.g., adding a parameter), you must manually update every single class that calls new Square().
+* **Violation of DIP:** High-level modules are depending on low-level concrete classes rather than the Shape abstraction.
+* **Lack of Flexibility:** It is difficult to swap implementations (e.g., replacing Square with Rectangle) without modifying all client code.
+
+---
+
+### 🏭 Simple / Practical Factory Pattern
+The **Simple Factory Pattern** is not officially a GoF design pattern, but it is a widely used programming idiom to encapsulate the creation of objects. It uses a static method in a dedicated class to create objects of various types based on given information.
+
+* **Key takeaways:**
+  * **Centralized Creation:** Instead of clients calling `new` multiple times across the codebase, all instantiation logic is moved to a single `Factory` class.
+  * **Decoupling:** Client classes (Class A, B, C, etc.) only depend on the `Shape` interface and the `Factory`, not the concrete classes (`Circle`, `Square`).
+  * **Ease of Change:** If the constructor or creation logic of a product changes, you only need to update it in one place (the Factory).
+  * **Conditional Logic:** The Factory typically uses an `if-else` or `switch` block to decide which concrete class to instantiate at runtime.
+  * If there is any change in creation logic, it will be changed only at Factory class. Instead of multiple classes across the project.
+  * **Violation of OCP:** If any new Shape is introduced then we have to touch this Factory class.
+  * Factory class can become bloated: If object creation is complex then this class becomes difficult to manage.
+  * **Leads to Violation of SRP:** Factory does 2 things, selection & construction logic.
+---
+
+### 🏭 Factory Method Pattern
+The **Factory Method Pattern** is a creational design pattern that provides an interface for creating objects in a superclass, but allows subclasses to alter the type of objects that will be created.
+
+* **Key takeaways:**
+  * **Deals with the Problem of Creation:** Instead of a single "Simple Factory" class handling all logic, the responsibility is moved to a factory method in the subclasses.
+  * **Dependency Inversion:** High-level code (the Client) depends on the **Creator abstraction** and the **Product interface**, rather than concrete implementations.
+  * **Extensibility:** You can introduce new types of products by creating a new Creator subclass without modifying existing code (adhering to the **Open/Closed Principle**).
+  * **Runtime Flexibility:** The specific subclass of the Creator determines which concrete product is instantiated at runtime.
+  * **Violation of OCP:** If any new shape is introduced then we now have flexibility to create a new Shape Factory class which supports OCP, but the place where we select this factory class still breaks the principle.
+  
+---
+
+### 🏰 Abstract Factory Pattern
+The **Abstract Factory Pattern** is a creational design pattern that lets you produce **families of related or dependent objects** without specifying their concrete classes. It is often referred to as a "Factory of Factories."
+
+* **Key takeaways:**
+  * **Family Consistency:** It ensures that objects created from the same factory are compatible with each other (e.g., a `MacFactory` produces a `MacButton` and a `MacCheckbox`, ensuring they match the OS theme).
+  * **Higher Abstraction:** While the Factory Method handles the creation of a single product, the Abstract Factory handles a suite of related products.
+  * **Constraint-Based Creation:** Useful when a system should be independent of how its products are created, but those products must be used together as a set.
+  * **Avoids Tight Coupling:** The client code interacts only with the abstract interfaces of the factory and the products, keeping the system highly decoupled and easy to maintain.
+  
 ---
 
 *Last Updated: March 2026*
