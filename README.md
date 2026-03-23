@@ -183,4 +183,106 @@ classDiagram
     ConcreteObserver2 --> ConcreteObservable : has-a
 ```
 ---
+
+## 🏗️ Structural Design Patterns
+Structural patterns explain how to assemble objects and classes into larger structures while keeping these structures flexible and efficient. They focus on how classes and objects are composed to form larger structures.
+
+---
+
+### 🟢 Decorator Pattern
+* A structural pattern that allows behavior to be added to an individual object, dynamically, without affecting the behavior of other objects from the same class.
+* Decorator pattern allows you to add new functionality to objects dynamically without altering the original structure.
+* **Key takeaways:**
+  * **Wrappers:** Often referred to as a "Wrapper" because it wraps the original object in a new object that adds functionality.
+  * **Dynamic Extension:** Provides a flexible alternative to subclassing for extending functionality.
+  * **Composition Over Inheritance:** Instead of creating a complex hierarchy of subclasses to cover every combination of features, you compose objects together.
+  * **Interface Consistency:** The decorator implements the same interface as the object it decorates, so the client doesn't know the difference between the "plain" object and the "decorated" one.
+  * **Example:** Adding toppings to a Pizza or adding features (GPS, Sunroof) to a Basic Car object.
+
+---
+
+### 🍕 The Problem: Without Decorator Pattern (Class Explosion)
+
+When we try to handle multiple combinations using only inheritance, we run into a "Class Explosion." For every new feature or topping, we are forced to create a new class for every possible combination.
+
+```mermaid
+graph TD
+    M[Margherita] --> C1[Margherita + Paneer + Mushroom]
+    M --> C2[Margherita + Cheese]
+    M --> C3[Margherita + Cheese + Mushroom]
+    M --> C4[Margherita + Mushroom]
+    M --> C5[Margherita + Paneer]
+    M --> C6[Margherita + Cheese + Paneer]
+    M --> C7[...]
+    M --> C8[Margherita + Cheese + Paneer + Mushroom]
+
+    style M fill:#f9f,stroke:#333,stroke-width:2px
+```
+
+**Key Takeaways:**
+* **Class Explosion:** We are creating classes for all possible combinations.
+* **Maintenance Nightmare:** If 1 new topping is introduced, we have to create a massive amount of new combination classes.
+* **Violation of OCP:** Every time a new topping is added, we are essentially "modifying" our system's complexity rather than extending it cleanly.
+
+### 🟢 Structural Pattern: Decorator Pattern
+The **Decorator Pattern** allows you to attach new behaviors to objects dynamically by placing these objects inside special wrapper classes that contain the behaviors.
+
+---
+
+### 🍕 The Solution: With Decorator Pattern
+Instead of "Class Explosion," we use **Composition** and **Inheritance** together to wrap a base object with any number of toppings.
+
+```mermaid
+classDiagram
+    direction TB
+    class BasePizza {
+        <<abstract>>
+        +cost() int
+    }
+    class Margherita {
+        +cost() 100
+    }
+    class VegDelight {
+        +cost() 150
+    }
+    class Farmhouse {
+      +cost() 150
+    }
+    class ToppingDecorator {
+        <<abstract>>
+        -BasePizza pizza
+        +cost() int
+    }
+    class ExtraCheese {
+        -BasePizza pizza
+        +cost() pizza.cost() + 20
+    }
+    class Mushroom {
+        -BasePizza pizza
+        +cost() pizza.cost() + 30
+    }
+    
+    class Paneer {
+        -BasePizza pizza
+        +cost() pizza.cost() + 50
+    }
+
+    class Chicken {
+      -BasePizza pizza
+      +cost() pizza.cost() + 50
+    }
+
+    Margherita --|> BasePizza : is-a
+    VegDelight --|> BasePizza : is-a
+    Farmhouse --|> BasePizza : is-a
+    ToppingDecorator --|> BasePizza : is-a
+    ToppingDecorator o-- BasePizza : has-a (Wraps)
+    ExtraCheese --|> ToppingDecorator : is-a
+    Mushroom --|> ToppingDecorator : is-a
+    Paneer --|> ToppingDecorator : is-a
+    Chicken --|> ToppingDecorator : is-a
+```
+
+---
+
 *Last Updated: March 2026*
