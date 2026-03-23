@@ -87,4 +87,100 @@ classDiagram
     ConcreteStrategyB ..|> Strategy : is-a
 ```
 ---
+
+### 🔔 Observer Pattern
+* Defines a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically.
+* It is a design pattern where an object (observer / publisher) maintains a list of dependents (observer) and automatically notifies dependants whenever there is change in state.
+* **Key takeaways:**
+  * **Subject & Observer:** The "Subject" (Observable) maintains a list of "Observers" and notifies them of any state changes.
+  * **Loose Coupling:** The Subject doesn't need to know the specific details of the Observer classes; it only knows they implement a specific interface.
+  * **Push vs. Pull:** Information can be "pushed" by the Subject to observers, or observers can "pull" the specific data they need after notification.
+  * **Real-world Example:** A YouTube channel (Subject) notifying its subscribers (Observers) when a new video is uploaded.
+
+---
+
+### 🖼️ Observer Pattern UML Structure (Push Model)
+
+```mermaid
+classDiagram
+    direction LR
+    class ObservableData {
+        +data1
+        +data2
+        +dataN
+    }
+    class Observable {
+        <<interface>>
+        +add(Observer)
+        +remove(Observer)
+        +notify()
+        +setState()
+    }
+    class ConcreteObservable {
+        -List~Observer~
+        -ObservableData
+        +add(Observer)
+        +remove(Observer)
+        +notify()
+        +setState()
+    }
+    class Observer {
+        <<interface>>
+        +update(ObservableData)
+    }
+    class ConcreteObserver1 {
+        +update(ObservableData)
+    }
+    class ConcreteObserver2 {
+        +update(ObservableData)
+    }
+
+    ConcreteObservable --|> Observable : Is-a
+    Observable --> Observer : has-a
+    ConcreteObserver1 --|> Observer : Is-a
+    ConcreteObserver2 --|> Observer : Is-a
+    ObservableData <.. ConcreteObservable : uses
+```
+---
+### 🖼️ Observer Pattern UML Structure (Pull Model)
+
+```mermaid
+classDiagram
+    direction LR
+    class Observable {
+        <<interface>>
+        +add(Observer)
+        +remove(Observer)
+        +notify()
+        +setState()
+    }
+    class ConcreteObservable {
+        -List~Observer~
+        -ObservableData
+        +add(Observer)
+        +remove(Observer)
+        +notify()
+        +setState()
+    }
+    class Observer {
+        <<interface>>
+        +update()
+    }
+    class ConcreteObserver1 {
+        -Observable obj
+        +update()
+    }
+    class ConcreteObserver2 {
+        -Observable obj
+        +update()
+    }
+
+    ConcreteObservable --|> Observable : Is-a
+    Observable --> Observer : has-a
+    ConcreteObserver1 --|> Observer : Is-a
+    ConcreteObserver2 --|> Observer : Is-a
+    ConcreteObserver1 --> ConcreteObservable : has-a
+    ConcreteObserver2 --> ConcreteObservable : has-a
+```
+---
 *Last Updated: March 2026*
