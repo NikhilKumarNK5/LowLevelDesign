@@ -6,4 +6,3 @@ public class Car extends EngineVehicle {
         return 4;
     }
 }
-

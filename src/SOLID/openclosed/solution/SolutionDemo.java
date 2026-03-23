@@ -17,4 +17,3 @@ public class SolutionDemo {
         // - CLOSED for modification (existing code remains unchanged)
     }
 }
-

@@ -27,4 +27,3 @@ public class Bicycle extends Bike {
         System.out.println("Bicycle Speed: " + this.speed);
     }
 }
-

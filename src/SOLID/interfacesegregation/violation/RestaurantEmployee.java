@@ -15,5 +15,3 @@ public interface RestaurantEmployee {
 
     void cleanTheKitchen();
 }
-
-

@@ -6,4 +6,3 @@ public class MotorCycle extends Vehicle {
         return "MotorCycle has " + this.getNumberOfWheels() + " wheels and has engine: " + this.hasEngine();
     }
 }
-

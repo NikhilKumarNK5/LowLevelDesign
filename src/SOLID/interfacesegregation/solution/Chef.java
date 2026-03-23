@@ -14,5 +14,3 @@ public class Chef implements ChefTasks {
         System.out.println("Deciding menu...");
     }
 }
-
-

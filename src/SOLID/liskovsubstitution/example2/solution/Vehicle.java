@@ -6,5 +6,3 @@ public class Vehicle {
         return 2;
     }
 }
-
-

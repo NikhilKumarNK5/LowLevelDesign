@@ -5,4 +5,3 @@ public class Bicycle extends Vehicle {
         return null;
     }
 }
-

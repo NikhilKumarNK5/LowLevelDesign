@@ -8,4 +8,3 @@ abstract class Bike {
     public abstract void applyBrakes();
 
 }
-

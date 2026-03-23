@@ -9,4 +9,3 @@ public class Vehicle {
         return true;
     }
 }
-

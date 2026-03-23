@@ -6,4 +6,3 @@ public interface WaiterTasks {
 
     void takeOrder();
 }
-

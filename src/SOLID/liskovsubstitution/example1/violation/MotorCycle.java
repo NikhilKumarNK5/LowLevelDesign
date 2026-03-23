@@ -35,4 +35,3 @@ public class MotorCycle implements Bike {
         System.out.println("MotorCycle Speed: " + this.speed);
     }
 }
-

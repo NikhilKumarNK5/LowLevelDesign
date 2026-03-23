@@ -14,5 +14,3 @@ public class Demo {
         waiter.cleanTheKitchen(); // forced implementation
     }
 }
-
-

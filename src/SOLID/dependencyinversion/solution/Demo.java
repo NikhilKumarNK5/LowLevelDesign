@@ -27,5 +27,3 @@ public class Demo {
         macBookWithBluetoothParts.getMouse().getSpecifications();
     }
 }
-
-

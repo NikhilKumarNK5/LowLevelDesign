@@ -13,5 +13,3 @@ public class Waiter implements WaiterTasks {
         System.out.println("Taking order...");
     }
 }
-
-

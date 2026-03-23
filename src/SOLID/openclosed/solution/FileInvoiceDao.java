@@ -16,4 +16,3 @@ public class FileInvoiceDao implements InvoiceDao {
         System.out.println("Saving to file...");
     }
 }
-

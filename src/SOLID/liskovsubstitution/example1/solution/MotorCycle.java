@@ -31,4 +31,3 @@ public class MotorCycle extends Bike implements Engine {
         System.out.println("MotorCycle Speed: " + this.speed);
     }
 }
-

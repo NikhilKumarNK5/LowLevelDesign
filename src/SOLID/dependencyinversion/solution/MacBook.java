@@ -24,4 +24,3 @@ public class MacBook {
         return keyboard;
     }
 }
-

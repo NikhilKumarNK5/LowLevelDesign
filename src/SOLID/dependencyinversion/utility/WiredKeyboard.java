@@ -22,5 +22,3 @@ public class WiredKeyboard implements Keyboard {
         System.out.println("Color: " + color);
     }
 }
-
-

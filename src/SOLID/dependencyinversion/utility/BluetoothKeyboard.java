@@ -22,5 +22,3 @@ public class BluetoothKeyboard implements Keyboard {
         System.out.println("Color: " + color);
     }
 }
-
-

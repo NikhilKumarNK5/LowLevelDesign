@@ -25,6 +25,3 @@ public class Demo {
         // macbook depends on wired keyboard and mouse - tight coupling - violation of DIP
     }
 }
-
-
-

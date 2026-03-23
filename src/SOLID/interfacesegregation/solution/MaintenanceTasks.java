@@ -6,4 +6,3 @@ public interface MaintenanceTasks {
 
     void reStockGroceries();
 }
-

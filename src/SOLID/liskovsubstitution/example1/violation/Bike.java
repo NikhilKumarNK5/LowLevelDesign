@@ -11,4 +11,3 @@ public interface Bike {
 
     void applyBrakes();
 }
-

@@ -15,5 +15,3 @@ public class DatabaseInvoiceDao implements InvoiceDao {
         System.out.println("Saving to DB...");
     }
 }
-
-

@@ -20,5 +20,3 @@ public class Demo {
         bicycle.turnOffEngine(); // fails to implement Bike class behavior
     }
 }
-
-

@@ -22,5 +22,3 @@ public class BluetoothMouse implements Mouse {
         System.out.println("Color: " + color);
     }
 }
-
-

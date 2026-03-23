@@ -5,4 +5,3 @@ public class EngineVehicle extends Vehicle {
         return true;
     }
 }
-
