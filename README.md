@@ -41,4 +41,50 @@ The SOLID principles are a set of five design principles intended to make softwa
 * Instead, both should **depend on abstractions** (interfaces or abstract classes).
 
 ---
+
+## 🎭 Behavioral Design Patterns
+Behavioral patterns focus on how objects distribute work and how they communicate with one another. Instead of just focusing on how objects are structured, these patterns define the **flow of data and responsibility** between them.
+
+---
+
+### 🟢 Strategy Pattern
+* Defines a family of algorithms, encapsulates each one, and makes them interchangeable.
+* **Key takeaways:**
+  * It allows the algorithm to vary independently from the clients that use it.
+  * Helps in avoiding a massive amount of conditional logic (if-else or switch cases) by delegating the task to a specific strategy object.
+  * Promotes the **Open/Closed Principle** as new strategies can be added without modifying the existing context code.
+  * Uses **composition** instead of inheritance to switch behaviors at runtime.
+  * Useful when we have multiple ways to perform a task and want to choose the approach dynamically.
+
+---
+
+### 🖼️ Strategy Pattern UML Structure
+
+```mermaid
+classDiagram
+    direction LR
+    class Client {
+        +Context context
+    }
+    class Context {
+        -Strategy strategy
+        +performOperation()
+    }
+    class Strategy {
+        <<interface>>
+        +execute()
+    }
+    class ConcreteStrategyA {
+        +execute()
+    }
+    class ConcreteStrategyB {
+        +execute()
+    }
+
+    Client --> Context
+    Context --> Strategy : has-a
+    ConcreteStrategyA ..|> Strategy : is-a
+    ConcreteStrategyB ..|> Strategy : is-a
+```
+---
 *Last Updated: March 2026*
