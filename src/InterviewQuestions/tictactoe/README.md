@@ -24,7 +24,7 @@ This project focuses on the Low-Level Design of a classic Tic-Tac-Toe game, emph
 
 ---
 
-### 🕹️ Tic-Tac-Toe UML Diagram
+### 🕹️ Tic-Tac-Toe UML
 
 ```mermaid
 classDiagram
